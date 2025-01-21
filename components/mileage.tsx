@@ -55,7 +55,6 @@ export default async function Mileage() {
     return (
         <>
             <section>
-                <h2>Mileage</h2>
                 <p>You have until December 24, 2027 to stay below 45,000 miles.</p>
                 <p>Current mileage: {currentMileage} as of {lastUpdated(data?.updatedAt)}</p>
                 <p>Time remaining: {getTimeRemaining('December 24, 2027')}</p>
