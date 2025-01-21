@@ -7,18 +7,9 @@ export default async function Mileage() {
         },
     });
     const currentMileage = data?.currentMileage
-    const maxMileage = 45000;
+    // const maxMileage = 45000;
     console.log("datata", data?.currentMileage)
     
-
-    async function getMileage() {
-        const mileage = await prisma.mileage.findUnique({
-            where: {
-                id: 'cm66li6b20000ujhphl21fo3i',
-            },
-        });
-        return mileage;
-    }
 
     function getTimeRemaining(targetDateString: string) {
         const targetDate = new Date(targetDateString);
@@ -32,8 +23,8 @@ export default async function Mileage() {
         return `${years} years, ${months} months, ${days} days`;
     }
 
-    function getAverageMilesPerDay() {
-        const targetDate = new Date('December 24, 2027');
+    function getAverageMilesPerDay(targetDateString: string, maxMileage: number) {
+        const targetDate = new Date(targetDateString);
         const currentDate = new Date();
         const timeDiff = targetDate.getTime() - currentDate.getTime();
         const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
@@ -69,7 +60,8 @@ export default async function Mileage() {
                 <p>Current mileage: {currentMileage} as of {lastUpdated(data?.updatedAt)}</p>
                 <p>Time remaining: {getTimeRemaining('December 24, 2027')}</p>
                 <p>Time remaining in year 1 of the lease: {getTimeRemaining('September 24, 2025')}</p>
-                <p>Average miles allowed per day: {getAverageMilesPerDay()}</p>
+                <p>Average miles allowed per day until the end of the lease: {getAverageMilesPerDay('December 24, 2027', 45000)}</p>
+                <p>Average miles allowed per day to stay under 15,000 in the first year: {getAverageMilesPerDay('09/24/2025', 15000)}</p>
             </section>
         </>
     );
