@@ -1,5 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import prisma from "@/app/lib/db";
+import { Card, CardBody, CardHeader } from '@heroui/card';
+import { Image } from '@heroui/image';
+import { Divider } from '@heroui/divider';
 export default async function Mileage() {
     const data = await prisma.mileage.findUnique({
         where: {
@@ -9,7 +12,7 @@ export default async function Mileage() {
     const currentMileage = data?.currentMileage
     // const maxMileage = 45000;
     console.log("datata", data?.currentMileage)
-    
+
 
     function getTimeRemaining(targetDateString: string) {
         const targetDate = new Date(targetDateString);
@@ -40,7 +43,7 @@ export default async function Mileage() {
         const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 
         if (daysDiff === 0) {
-            return "today";
+            return "Today";
         } else if (daysDiff === 1) {
             return "1 day ago";
         } else {
@@ -54,13 +57,51 @@ export default async function Mileage() {
 
     return (
         <>
-            <section>
+
+            <section className='p-4 mb-4'>
                 <p>You have until December 24, 2027 to stay below 45,000 miles.</p>
-                <p>Current mileage: {currentMileage} as of {lastUpdated(data?.updatedAt)}</p>
-                <p>Time remaining: {getTimeRemaining('December 24, 2027')}</p>
-                <p>Time remaining in year 1 of the lease: {getTimeRemaining('September 24, 2025')}</p>
-                <p>Average miles allowed per day until the end of the lease: {getAverageMilesPerDay('December 24, 2027', 45000)}</p>
-                <p>Average miles allowed per day to stay under 15,000 in the first year: {getAverageMilesPerDay('09/24/2025', 15000)}</p>
+                <Divider className='mt-4 mb-4' />
+                <p><span className='font-bold'>Time remaining in lease:</span> {getTimeRemaining('December 24, 2027')}</p>
+                <p><span className='font-bold'>Time remaining in year 1:</span> {getTimeRemaining('September 24, 2025')}</p>
+            </section>
+            <section className='flex flex-wrap gap-4'>
+                <div className='p-10'>
+                    <Card className="py-4">
+                        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                            <p className="text-tiny uppercase font-bold">Current Mileage As Of</p>
+                            <h4 className="font-bold text-large">{lastUpdated(data?.updatedAt)}</h4>
+                        </CardHeader>
+                        <Divider className='mt-4' />
+                        <CardBody className="overflow-visible py-2 items-center">
+                            <h2 className='text-4xl text-blue-600'>{currentMileage}</h2>
+                        </CardBody>
+                    </Card>
+                </div>
+                <div className='p-10'>
+                    <Card className="py-4">
+                        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                            <p className="text-tiny uppercase font-bold">Average Miles Per day</p>
+                            <h4 className="font-bold text-large">End Of Lease</h4>
+                        </CardHeader>
+                        <Divider className='mt-4' />
+                        <CardBody className="overflow-visible py-2 items-center">
+                            <h2 className='text-4xl text-blue-600'>{getAverageMilesPerDay('December 24, 2027', 45000)}</h2>
+                        </CardBody>
+                    </Card>
+                </div>
+                <div className='p-10'>
+                    <Card className="py-4">
+                        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                            <p className="text-tiny uppercase font-bold">Average Miles Per day</p>
+                            <h4 className="font-bold text-large">End Of Year 1</h4>
+                        </CardHeader>
+                        <Divider className='mt-4' />
+                        <CardBody className="overflow-visible py-2 items-center">
+                            <h2 className='text-4xl text-blue-600'>{getAverageMilesPerDay('September 24, 2025', 15000)}</h2>
+                        </CardBody>
+                    </Card>
+                </div>
+                
             </section>
         </>
     );
