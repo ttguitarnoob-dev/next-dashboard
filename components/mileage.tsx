@@ -64,8 +64,8 @@ export default async function Mileage() {
                 <p><span className='font-bold'>Time remaining in lease:</span> {getTimeRemaining('December 24, 2027')}</p>
                 <p><span className='font-bold'>Time remaining in year 1:</span> {getTimeRemaining('September 24, 2025')}</p>
             </section>
-            <section className='flex flex-wrap gap-4'>
-                <div className='p-10'>
+            <section className='flex flex-wrap gap-4 justify-center'>
+                <div>
                     <Card className="py-4">
                         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                             <p className="text-tiny uppercase font-bold">Current Mileage As Of</p>
@@ -77,7 +77,7 @@ export default async function Mileage() {
                         </CardBody>
                     </Card>
                 </div>
-                <div className='p-10'>
+                <div>
                     <Card className="py-4">
                         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                             <p className="text-tiny uppercase font-bold">Average Miles Per day</p>
@@ -89,7 +89,7 @@ export default async function Mileage() {
                         </CardBody>
                     </Card>
                 </div>
-                <div className='p-10'>
+                <div>
                     <Card className="py-4">
                         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                             <p className="text-tiny uppercase font-bold">Average Miles Per day</p>
