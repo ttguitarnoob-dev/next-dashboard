@@ -91,7 +91,7 @@ export async function GET() {
     const perDayLease = mileLeftLease / daysRemaining(endLease.date)
     const perDayYear = milesLeftYear / daysRemaining(yearOne.date)
 
-    const finalResponse = `Hi! Your current mileage is ${currentMileage.toFixed()}. You must stay below an average of ${perDayYear.toFixed()} miles per day to stay below the alloted mileage for this year, and average ${perDayLease.toFixed()} miles per day to stay below the final mileage for the lease. You've got a total of ${mileLeftLease} miles left in the lease and ${milesLeftYear} miles left in this year. Good luck! `
+    const finalResponse = `Hi! Your current mileage is ${currentMileage.toFixed()} as of ${mileageEntry.updatedAt.toLocaleDateString()}. You must stay below an average of ${perDayYear.toFixed()} miles per day to stay below the alloted mileage for this year, and average ${perDayLease.toFixed()} miles per day to stay below the final mileage for the lease. You've got a total of ${mileLeftLease} miles left in the lease and ${milesLeftYear} miles left in this year. Good luck! `
 
     //RESPONSE SENT TO REQUESTER!!
     return new Response(JSON.stringify(finalResponse), {
@@ -100,7 +100,7 @@ export async function GET() {
     });
   } catch (error) {
     return new Response(
-      JSON.stringify({ error: "Something went wrong", details: error.message }),
+      JSON.stringify({ error: "Something went wrong", details: error.message}),
       { status: 500 }
     );
   }
