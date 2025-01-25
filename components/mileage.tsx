@@ -4,7 +4,7 @@ import { Card, CardBody, CardHeader } from '@heroui/card';
 import { Image } from '@heroui/image';
 import { Divider } from '@heroui/divider';
 export default async function Mileage() {
-    const data = await prisma.mileage.findUnique({
+    const data: any = await prisma.mileage.findUnique({
         where: {
             id: 'cm66li6b20000ujhphl21fo3i',
         },
@@ -85,7 +85,7 @@ export default async function Mileage() {
                         </CardHeader>
                         <Divider className='mt-4' />
                         <CardBody className="overflow-visible py-2 items-center">
-                            <h2 className='text-4xl text-blue-600'>{getAverageMilesPerDay('December 24, 2027', 45000)}</h2>
+                            <h2 className='text-4xl text-blue-600'>{getAverageMilesPerDay('December 24, 2027', 48750)}</h2>
                         </CardBody>
                     </Card>
                 </div>

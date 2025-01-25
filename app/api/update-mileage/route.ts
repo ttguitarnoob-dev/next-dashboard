@@ -37,7 +37,7 @@ export async function POST(request: Request) {
 export async function GET() {
   const id = "cm66li6b20000ujhphl21fo3i"
   const endLease = {
-    mileage: 45000,
+    mileage: 48750,
     date: "December 27, 2027"
   }
   const yearOne = {
@@ -47,13 +47,13 @@ export async function GET() {
 
   function daysRemaining(targetDate: string) {
     // Get today's date
-    const today = new Date();
+    const today: any = new Date();
 
     // Ensure only the date portion is used (time is set to 0)
     today.setHours(0, 0, 0, 0);
 
     // Convert the target date string into a Date object
-    const target = new Date(targetDate);
+    const target: any = new Date(targetDate);
     target.setHours(0, 0, 0, 0);
 
     // Calculate the difference in milliseconds
@@ -98,7 +98,7 @@ export async function GET() {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
-  } catch (error) {
+  } catch (error: any) {
     return new Response(
       JSON.stringify({ error: "Something went wrong", details: error.message}),
       { status: 500 }
